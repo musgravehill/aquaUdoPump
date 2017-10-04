@@ -8,7 +8,7 @@ void TIMEMACHINE_loop() {
 
 void TIMEMACHINE_211ms() {
   BUTTON_check();
-  BUZZER_state();
-  STEPPER_UDO_SENSOR_alarm();
-  RTC_alarm();
+  //BUZZER_state();
+  //STEPPER_UDO_SENSOR_alarm();
+  //RTC_alarm();
 }

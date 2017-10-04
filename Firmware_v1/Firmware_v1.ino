@@ -29,6 +29,7 @@ bool INTERFACE_BUZZER_isOn = false;
 
 
 void setup() {
+  TIMER_STEPPER_UDO_config();
   STEPPER_UDO_init();
   INTERFACE_init();
   delay(10);

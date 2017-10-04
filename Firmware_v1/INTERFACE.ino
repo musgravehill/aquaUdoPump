@@ -5,18 +5,18 @@ void INTERFACE_init() {
 }
 
 void BUTTON_check() {
-  uint8_t btnState;
-  //udo push
+  int8_t btnState;
+  /*//udo push
   btnState = digitalRead(BUTTON_udo_push);
   if (btnState == LOW) {
     STEPPER_UDO_PUSH_init();
-  }
+  }*/
   //udo pull
   btnState = digitalRead(BUTTON_udo_pull);
   if (btnState == LOW) {
-    STEPPER_UDO_PULL_init();
+    STEPPER_UDO_PULL_init();    
   } else {
-    STEPPER_UDO_PULL_END();
+    STEPPER_UDO_PULL_END();     
   }
 }
 

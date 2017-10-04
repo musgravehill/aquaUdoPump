@@ -10,7 +10,7 @@
 */
 
 void TIMER_STEPPER_UDO_config() {
-  /////  STEPPER_UDO_us_for_tick  18698.8043687066 us = 53.479355165272 Hz
+  /////  starSpeed_us_for_microtick  18698.8043687066 us = 53.479355165272 Hz
   //OCR1A =  [ 16,000,000Hz/ (prescaler * desired interrupt frequency) ] - 1
   //OCR1A = 16000000/(256*53.479355165272)    -1 = 1167.675273044163
   //f = 16000000(256*(1168+1)) = 53.464499572284 Hz by Timer1
@@ -22,7 +22,7 @@ void TIMER_STEPPER_UDO_config() {
   TCCR1B = 0;// same for TCCR1B
   TCNT1  = 0;//initialize counter value to 0
 
-  OCR1A = 1168;    //Верхняя граница счета. Диапазон от 0 до 65535.
+  OCR1A = 1000;    //Верхняя граница счета. Диапазон от 0 до 65535.
 
   TCCR1B |= (1 << WGM12);  // Режим CTC (сброс по совпадению)
 
@@ -46,7 +46,7 @@ ISR (TIMER1_COMPA_vect) {
   }
   if (STEPPER_UDO_STATE_pull) {
     STEPPER_UDO_PULLING();
-  }
+  }  
 }
 
 
