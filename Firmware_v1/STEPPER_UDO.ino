@@ -9,6 +9,7 @@ void STEPPER_UDO_PULLING() {
   STEPPER_UDO_tick();
 }
 
+
 bool STEPPER_UDO_SENSOR_END_min_isAllow() {
   uint8_t st;
   st = digitalRead(STEPPER_UDO_SENSOR_END_min);
@@ -26,6 +27,12 @@ bool STEPPER_UDO_SENSOR_END_max_isAllow() {
     return true;
   } else {
     return false;
+  }
+}
+
+void STEPPER_UDO_SENSOR_alarm() {
+  if (!STEPPER_UDO_SENSOR_END_min_isAllow()) {
+    INTERFACE_BUZZER_isOn = true;
   }
 }
 
