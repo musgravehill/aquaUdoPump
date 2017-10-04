@@ -5,8 +5,9 @@ void RTC_events() {
   uint8_t minute = RTC_DT.minute;
 
   //STEPPER_UDO
-  //запомнить millis() предыдущего запуска удобрений, чтобы за 1 минуту не вызвать много раз подачу удо.
-
+  if (minute == 15) {
+    STEPPER_UDO_PUSH_init();
+  }
 
   //relay
   if (minute % 2 == 1) {
@@ -17,9 +18,12 @@ void RTC_events() {
     RELAY_2_set(true);
   }
 
+#ifdef DEBUG
   Serial.print(hour);
   Serial.print(":");
-  Serial.print(minute);
+  Serial.println(minute);
+#endif
+
 }
 
 void RTC_init() {

@@ -3,6 +3,8 @@
 #include <Wire.h>
 #include <DS3231.h>
 
+//#define DEBUG true
+
 //=======================INIT IN-OUT======================================================
 #define STEPPER_UDO_DRIVER_notEN 12 //PB4
 #define STEPPER_UDO_DRIVER_STEP 10 //PB2
@@ -27,6 +29,7 @@ uint16_t STEPPER_UDO_1DOSE_steps_made = 0L;
 bool STEPPER_UDO_STATE_push = false; //push 1 doze of UDO to aqua
 bool STEPPER_UDO_STATE_pull = false; //pull (suck) UDOs doses to cylinders
 
+uint32_t STEPPER_UDO_push_prev_ms = 1L;
 //================================== TIMEMACHINE ==================================================
 uint32_t TIMEMACHINE_prev_211ms = 1L;
 uint32_t TIMEMACHINE_prev_1103ms = 1L;
@@ -45,7 +48,9 @@ void setup() {
   STEPPER_UDO_init();
   INTERFACE_init();
   RELAY_init();
+#ifdef DEBUG
   Serial.begin(9600);
+#endif
   delay(10);
 }
 

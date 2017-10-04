@@ -1,12 +1,15 @@
 
 void STEPPER_UDO_PUSH_init() {
-  if (!STEPPER_UDO_STATE_push) {
-    STEPPER_UDO_PULL_END();
-    STEPPER_UDO_1DOSE_steps_made = 0L;
-    STEPPER_UDO_en(true);
-    STEPPER_UDO_dir(STEPPER_UDO_DIR_push);
+  if ( (millis() - STEPPER_UDO_push_prev_ms) > 122000 ) { //122s прошло от предыдущей подачи удо
+    if (!STEPPER_UDO_STATE_push) {
+      STEPPER_UDO_PULL_END();
+      STEPPER_UDO_1DOSE_steps_made = 0L;
+      STEPPER_UDO_en(true);
+      STEPPER_UDO_dir(STEPPER_UDO_DIR_push);
+      STEPPER_UDO_push_prev_ms = millis();
+    }
+    STEPPER_UDO_STATE_push = true;
   }
-  STEPPER_UDO_STATE_push = true;
 }
 void STEPPER_UDO_PUSHING_1DOSE() {
   if ( (STEPPER_UDO_1DOSE_steps_made < STEPPER_UDO_1DOSE_steps) && STEPPER_UDO_SENSOR_END_min_isAllow()) {
