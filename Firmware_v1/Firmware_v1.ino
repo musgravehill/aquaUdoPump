@@ -7,8 +7,8 @@
 #define BUZZER_pin 5 //PD5
 #define BUTTON_udo_add 6 //PD6
 #define BUTTON_udo_pull 7 //PD7
-#define SENSOR_END_1 8 //PB0
-#define SENSOR_END_2 9 //PB1
+#define STEPPER_UDO_SENSOR_END_min 8 //PB0
+#define STEPPER_UDO_SENSOR_END_max 9 //PB1
 
 //================================= STEPPER_UDO =================================================
 // 1 ml ~ 5.6 mm cylinder ~ 7 оборотов винта M5*0.8
