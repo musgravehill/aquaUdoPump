@@ -40,10 +40,10 @@ void TIMER_STEPPER_UDO_config() {
 }
 
 // Обработчик прерывания таймера 1
-ISR (TIMER1_COMPA_vect) {  
-    if (SYS_STATE == SYS_STATE_GOTO_INIT) {
-      STEPPER_UDO_tick();
-    }    
+ISR (TIMER1_COMPA_vect) {
+  if (STEPPER_UDO_STATE_push || STEPPER_UDO_STATE_pull) {
+    STEPPER_UDO_tick();
+  }
 }
 
 

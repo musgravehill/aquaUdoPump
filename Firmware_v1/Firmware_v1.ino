@@ -1,29 +1,40 @@
 #include <stdlib.h>
 
 //=======================INIT IN-OUT======================================================
-
 #define STEPPER_UDO_DRIVER_notEN 12 //PB4
 #define STEPPER_UDO_DRIVER_STEP 10 //PB2
 #define STEPPER_UDO_DRIVER_DIR 11 //PB3
-
-#define BUZZER 5 //PD5
+#define BUZZER_pin 5 //PD5
 #define BUTTON_udo_add 6 //PD6
 #define BUTTON_udo_pull 7 //PD7
 #define SENSOR_END_1 8 //PB0
 #define SENSOR_END_2 9 //PB1
 
-#define STEPPER_UDO_DIR_push true;
-#define STEPPER_UDO_DIR_pull false;
+//================================= STEPPER_UDO =================================================
+// 1 ml ~ 5.6 mm cylinder ~ 7 оборотов винта M5*0.8
+uint16_t STEPPER_UDO_DOSE_steps = 1000L;
 
+#define STEPPER_UDO_DIR_push true
+#define STEPPER_UDO_DIR_pull false
 
+bool STEPPER_UDO_STATE_push = false; //push 1 doze of UDO to aqua
+bool STEPPER_UDO_STATE_pull = false; //pull (suck) UDOs doses to cylinders
+
+//================================== TIMEMACHINE ==================================================
+uint32_t TIMEMACHINE_prev_503ms = 1L;
+
+//================================== INTERFACE ====================================================
+bool INTERFACE_BUZZER_isOn = false;
 
 
 void setup() {
-  // put your setup code here, to run once:
-
+  STEPPER_UDO_init();
+  INTERFACE_init();
+  delay(10);
+  Serial.begin(9600);
+  delay(10);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
+  TIMEMACHINE_loop();
 }

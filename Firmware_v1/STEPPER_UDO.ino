@@ -22,14 +22,15 @@ void STEPPER_UDO_en(bool is_en) {
 }
 
 void STEPPER_UDO_init() {
-  pinMode(STEPPER_UDO_DRIVER_STEP,  OUTPUT);
+  pinMode(STEPPER_UDO_DRIVER_STEP, OUTPUT);
   digitalWrite(STEPPER_UDO_DRIVER_STEP, LOW); //no step
 
-  pinMode(STEPPER_UDO_DRIVER_DIR,  OUTPUT);
+  pinMode(STEPPER_UDO_DRIVER_DIR, OUTPUT);
   STEPPER_UDO_dir(STEPPER_UDO_DIR_push);
 
-  pinMode(STEPPER_UDO_DRIVER_notEN,  OUTPUT);
+  pinMode(STEPPER_UDO_DRIVER_notEN, OUTPUT);
   STEPPER_UDO_en(false);
 
   TIMER_STEPPER_UDO_config;
 }
+
