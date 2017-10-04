@@ -12,7 +12,7 @@
 
 //================================= STEPPER_UDO =================================================
 // 1 ml ~ 5.6 mm cylinder ~ 7 оборотов винта M5*0.8
-uint16_t STEPPER_UDO_1DOSE_steps = 1000L;
+uint16_t STEPPER_UDO_1DOSE_steps = 7*2048L;
 uint16_t STEPPER_UDO_1DOSE_steps_made = 0L;
 
 #define STEPPER_UDO_DIR_push true

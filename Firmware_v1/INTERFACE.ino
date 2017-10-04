@@ -6,17 +6,17 @@ void INTERFACE_init() {
 
 void BUTTON_check() {
   int8_t btnState;
-  /*//udo push
+  //udo push
   btnState = digitalRead(BUTTON_udo_push);
-  if (btnState == LOW) {
+  if (btnState == LOW) { //press it
     STEPPER_UDO_PUSH_init();
-  }*/
+  }
   //udo pull
   btnState = digitalRead(BUTTON_udo_pull);
-  if (btnState == LOW) {
-    STEPPER_UDO_PULL_init();    
+  if (btnState == LOW) { //press it
+    STEPPER_UDO_PULL_init();
   } else {
-    STEPPER_UDO_PULL_END();     
+    STEPPER_UDO_PULL_END();
   }
 }
 
