@@ -1,6 +1,15 @@
+void STEPPER_UDO_PUSH_handmade() {
+  STEPPER_UDO_en(true);
+  STEPPER_UDO_dir(STEPPER_UDO_DIR_push);  
+  for (int i=0; i <= 255; i++){
+      STEPPER_UDO_tick();
+      delay(1);
+   } 
+}
+
 
 void STEPPER_UDO_PUSH_init() {
-  if ( (millis() - STEPPER_UDO_push_prev_ms) > 122000 ) { //122s прошло от предыдущей подачи удо
+  if ( (millis() - STEPPER_UDO_push_prev_ms) > 333000 ) { //333s прошло от предыдущей подачи удо
     if (!STEPPER_UDO_STATE_push) {
       STEPPER_UDO_PULL_END();
       STEPPER_UDO_1DOSE_steps_made = 0L;
@@ -24,7 +33,6 @@ void STEPPER_UDO_PUSH_END() {
     STEPPER_UDO_en(false);
   }
   STEPPER_UDO_STATE_push = false;
-
 }
 
 void STEPPER_UDO_PULL_init() {

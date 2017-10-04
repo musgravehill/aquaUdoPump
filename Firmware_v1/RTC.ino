@@ -5,17 +5,17 @@ void RTC_events() {
   uint8_t minute = RTC_DT.minute;
 
   //STEPPER_UDO
-  if (minute == 15) {
+  if (hour == 18 && minute == 30 ) {
     STEPPER_UDO_PUSH_init();
   }
 
   //relay
   if (minute % 2 == 1) {
-    RELAY_1_set(true);
-    RELAY_2_set(false);
+    //RELAY_1_set(true);
+    //RELAY_2_set(false);
   } else {
-    RELAY_1_set(false);
-    RELAY_2_set(true);
+    //RELAY_1_set(false);
+    //RELAY_2_set(true);
   }
 
 #ifdef DEBUG

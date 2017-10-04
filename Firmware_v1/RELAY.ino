@@ -1,5 +1,5 @@
 void RELAY_1_set(bool pos) {
-  if (pos) {
+  if (!pos) {
     PORTD |= _BV(PD3); //high
   } else {
     PORTD &= ~_BV(PD3); //low
@@ -7,7 +7,7 @@ void RELAY_1_set(bool pos) {
 }
 
 void RELAY_2_set(bool pos) {
-  if (pos) {
+  if (!pos) {
     PORTD |= _BV(PD4); //high
   } else {
     PORTD &= ~_BV(PD4); //low

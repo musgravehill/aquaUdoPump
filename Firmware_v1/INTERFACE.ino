@@ -10,7 +10,7 @@ void BUTTON_check() {
   //udo push
   btnState = digitalRead(BUTTON_udo_push);
   if (btnState == LOW) { //press it
-    STEPPER_UDO_PUSH_init();
+    STEPPER_UDO_PUSH_handmade();
   }
   //udo pull
   btnState = digitalRead(BUTTON_udo_pull);
