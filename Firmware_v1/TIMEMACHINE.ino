@@ -4,11 +4,27 @@ void TIMEMACHINE_loop() {
     TIMEMACHINE_211ms();
     TIMEMACHINE_prev_211ms = TIMEMACHINE_currMillis;
   }
+  if ((TIMEMACHINE_currMillis - TIMEMACHINE_prev_1103ms) > 1103L) {
+    TIMEMACHINE_1103ms();
+    TIMEMACHINE_prev_1103ms = TIMEMACHINE_currMillis;
+  }
+  if ((TIMEMACHINE_currMillis - TIMEMACHINE_prev_3571ms) > 3571L) {
+    TIMEMACHINE_3571ms();
+    TIMEMACHINE_prev_3571ms = TIMEMACHINE_currMillis;
+  }
 }
 
 void TIMEMACHINE_211ms() {
   BUTTON_check();
+}
+
+void TIMEMACHINE_1103ms() {
   BUZZER_state();
   STEPPER_UDO_SENSOR_alarm();
   RTC_alarm();
 }
+
+void TIMEMACHINE_3571ms() {
+  RTC_events();
+}
+

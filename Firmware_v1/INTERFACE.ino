@@ -2,6 +2,7 @@ void INTERFACE_init() {
   pinMode(BUTTON_udo_push, INPUT);
   pinMode(BUTTON_udo_pull, INPUT);
   pinMode(BUZZER_pin, OUTPUT);
+  delay(10);
 }
 
 void BUTTON_check() {
@@ -15,9 +16,7 @@ void BUTTON_check() {
   btnState = digitalRead(BUTTON_udo_pull);
   if (btnState == LOW) { //press it
     STEPPER_UDO_PULL_init();
-  } else {
-    STEPPER_UDO_PULL_END();
-  }
+  } 
 }
 
 void BUZZER_state() {

@@ -109,5 +109,7 @@ void STEPPER_UDO_init() {
   pinMode(STEPPER_UDO_SENSOR_END_min, INPUT);
 
   pinMode(STEPPER_UDO_SENSOR_END_max, INPUT);
+
+  delay(10);
 }
 
