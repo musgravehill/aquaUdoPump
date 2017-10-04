@@ -1,19 +1,44 @@
 
-void STEPPER_UDO_PUSHING_1_DOSE() {
-  if (STEPPER_UDO_SENSOR_END_min_isAllow()) {
+void STEPPER_UDO_PUSH_init() {
+  STEPPER_UDO_PULL_END();
+  STEPPER_UDO_1DOSE_steps_made = 0L;
+  STEPPER_UDO_en(true);
+  STEPPER_UDO_dir(STEPPER_UDO_DIR_push);
+  STEPPER_UDO_STATE_push = true;
+}
+void STEPPER_UDO_PUSHING_1DOSE() {
+  if ( (STEPPER_UDO_1DOSE_steps_made < STEPPER_UDO_1DOSE_steps) && STEPPER_UDO_SENSOR_END_min_isAllow()) {
+    STEPPER_UDO_tick();
+    STEPPER_UDO_1DOSE_steps_made++;
+  } else {
+    STEPPER_UDO_PUSHING_END();
+  }
+}
+void STEPPER_UDO_PUSH_END() {
+  STEPPER_UDO_STATE_push = false;
+  STEPPER_UDO_en(false);
+}
+
+void STEPPER_UDO_PULL_init() {
+  STEPPER_UDO_PUSH_END();
+  STEPPER_UDO_en(true);
+  STEPPER_UDO_dir(STEPPER_UDO_DIR_pull);
+  STEPPER_UDO_STATE_pull = true;
+}
+void STEPPER_UDO_PULLING() {
+  if (STEPPER_UDO_SENSOR_END_max_isAllow()) {
     STEPPER_UDO_tick();
   }
 }
-
-void STEPPER_UDO_PULLING() {
-  STEPPER_UDO_tick();
+void STEPPER_UDO_PULL_END() {
+  STEPPER_UDO_STATE_pull = false;
+  STEPPER_UDO_en(false);
 }
-
 
 bool STEPPER_UDO_SENSOR_END_min_isAllow() {
   uint8_t st;
   st = digitalRead(STEPPER_UDO_SENSOR_END_min);
-  if (st == LOW) {
+  if (st == HIGH) {
     return true;
   } else {
     return false;
@@ -23,7 +48,7 @@ bool STEPPER_UDO_SENSOR_END_min_isAllow() {
 bool STEPPER_UDO_SENSOR_END_max_isAllow() {
   uint8_t st;
   st =  digitalRead(STEPPER_UDO_SENSOR_END_max);
-  if (st == LOW) {
+  if (st == HIGH) {
     return true;
   } else {
     return false;

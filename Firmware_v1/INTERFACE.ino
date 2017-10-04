@@ -1,18 +1,22 @@
 void INTERFACE_init() {
-  pinMode(BUTTON_udo_add, INPUT);
+  pinMode(BUTTON_udo_push, INPUT);
   pinMode(BUTTON_udo_pull, INPUT);
   pinMode(BUZZER_pin, OUTPUT);
 }
 
 void BUTTON_check() {
   uint8_t btnState;
+  //udo push
+  btnState = digitalRead(BUTTON_udo_push);
+  if (btnState == LOW) {
+    STEPPER_UDO_PUSH_init();
+  }
   //udo pull
   btnState = digitalRead(BUTTON_udo_pull);
-  if (btnState == LOW && STEPPER_UDO_SENSOR_END_max_isAllow()) {
-    STEPPER_UDO_dir(STEPPER_UDO_DIR_pull);
-    STEPPER_UDO_STATE_pull = true;
+  if (btnState == LOW) {
+    STEPPER_UDO_PULL_init();
   } else {
-    STEPPER_UDO_STATE_pull = false;
+    STEPPER_UDO_PULL_END();
   }
 }
 
