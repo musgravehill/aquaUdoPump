@@ -3,6 +3,9 @@ void INTERFACE_init() {
   pinMode(BUTTON_udo_pull, INPUT);
   pinMode(BUZZER_pin, OUTPUT);
   delay(10);
+  INTERFACE_BUZZER_isOn = true;
+  delay(10);
+  INTERFACE_BUZZER_isOn = false;
 }
 
 void BUTTON_check() {

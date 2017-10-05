@@ -3,7 +3,7 @@
 #include <Wire.h>
 #include <DS3231.h>
 
-//#define DEBUG true
+#define DEBUG true
 
 //=======================INIT IN-OUT======================================================
 #define STEPPER_UDO_DRIVER_notEN 12 //PB4
