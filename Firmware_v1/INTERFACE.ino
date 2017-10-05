@@ -3,9 +3,9 @@ void INTERFACE_init() {
   pinMode(BUTTON_udo_pull, INPUT);
   pinMode(BUZZER_pin, OUTPUT);
   delay(10);
-  INTERFACE_BUZZER_isOn = true;
-  delay(10);
-  INTERFACE_BUZZER_isOn = false;
+  digitalWrite(BUZZER_pin, HIGH);
+  delay(20);
+  digitalWrite(BUZZER_pin, LOW);
 }
 
 void BUTTON_check() {
@@ -19,7 +19,7 @@ void BUTTON_check() {
   btnState = digitalRead(BUTTON_udo_pull);
   if (btnState == LOW) { //press it
     STEPPER_UDO_PULL_init();
-  } 
+  }
 }
 
 void BUZZER_state() {

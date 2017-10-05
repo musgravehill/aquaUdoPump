@@ -1,7 +1,21 @@
+
+/*
+  ======TODO
+  0. OLED 0.96
+  1. DS18B20 if (T<20 || T>28) => ALERT
+  2. feeder
+*/
+
+//may be Timer1 ?
 #include <stdlib.h>
+
 //RTC
 #include <Wire.h>
 #include <DS3231.h>
+
+//DS18B20  temperature
+#include <OneWire.h>
+OneWire SENSOR_TEMPERATURE(2);
 
 #define DEBUG true
 
@@ -19,7 +33,7 @@
 #define RELAY_1 3 //PD3
 #define RELAY_2 4 //PD4
 //================================= STEPPER_UDO =================================================
-// 1 ml => 5.6 mm cylinder => 7 оборотов винта M5*0.8 => 7 * (2048 steps on 1 turn) 
+// 1 ml => 5.6 mm cylinder => 7 оборотов винта M5*0.8 => 7 * (2048 steps on 1 turn)
 uint16_t STEPPER_UDO_1DOSE_steps = 7 * 2048L;
 uint16_t STEPPER_UDO_1DOSE_steps_made = 0L;
 
@@ -41,6 +55,12 @@ bool INTERFACE_BUZZER_isOn = false;
 //==================================== RTC ========================================================
 DS3231 RTC;
 RTCDateTime RTC_DT;
+uint8_t RTC_hour = 1;
+uint8_t RTC_minute = 1;
+
+//===================================== SENSOR_TEMPERATURE ========================================
+int SENSOR_tC = 10;
+bool SENSOR_TEMPERATURE_state = false;
 
 void setup() {
   TIMER_STEPPER_UDO_config(); //timer ICR before all, first!

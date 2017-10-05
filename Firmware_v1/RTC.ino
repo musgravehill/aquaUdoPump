@@ -1,17 +1,17 @@
 
 void RTC_events() {
   RTC_DT = RTC.getDateTime();
-  uint16_t year = RTC_DT.year;
-  uint8_t hour = RTC_DT.hour;
-  uint8_t minute = RTC_DT.minute;
+  uint16_t RTC_year = RTC_DT.year;
+  RTC_hour = RTC_DT.hour;
+  RTC_minute = RTC_DT.minute;
 
   //STEPPER_UDO
-  if (hour == 9 && minute == 55 ) {
+  if (RTC_hour == 10 && RTC_minute == 30 ) {
     STEPPER_UDO_PUSH_1DOSE_init();
   }
 
   //RELAY
-  if (minute % 2 == 1) {
+  if (RTC_minute % 2 == 1) {
     //RELAY_1_set(true);
     //RELAY_2_set(false);
   } else {
@@ -20,12 +20,12 @@ void RTC_events() {
   }
 
   //ALARM (if date is incorrect)
-  RTC_alarm(year);
+  RTC_alarm(RTC_year);
 
 #ifdef DEBUG
-  Serial.print(hour);
+  Serial.print(RTC_hour);
   Serial.print(":");
-  Serial.println(minute);
+  Serial.println(RTC_minute);
 #endif
 }
 
