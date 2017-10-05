@@ -19,7 +19,7 @@
 #define RELAY_1 3 //PD3
 #define RELAY_2 4 //PD4
 //================================= STEPPER_UDO =================================================
-// 1 ml ~ 5.6 mm cylinder ~ 7 оборотов винта M5*0.8
+// 1 ml => 5.6 mm cylinder => 7 оборотов винта M5*0.8 => 7 * (2048 steps on 1 turn) 
 uint16_t STEPPER_UDO_1DOSE_steps = 7 * 2048L;
 uint16_t STEPPER_UDO_1DOSE_steps_made = 0L;
 

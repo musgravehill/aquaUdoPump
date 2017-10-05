@@ -11,7 +11,7 @@ void STEPPER_UDO_PUSH_handmade() {
 }
 
 //======================== pushing 1 dose of udo =============================================
-void STEPPER_UDO_PUSH_init() {
+void STEPPER_UDO_PUSH_1DOSE_init() {
   if ( (millis() - STEPPER_UDO_push_prev_ms) > 333000 ) { //333s прошло от предыдущей подачи удо
     STEPPER_UDO_PULL_END();
     STEPPER_UDO_1DOSE_steps_made = 0L;

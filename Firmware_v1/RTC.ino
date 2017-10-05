@@ -6,11 +6,11 @@ void RTC_events() {
   uint8_t minute = RTC_DT.minute;
 
   //STEPPER_UDO
-  if (hour == 18 && minute == 30 ) {
-    STEPPER_UDO_PUSH_init();
+  if (hour == 9 && minute == 55 ) {
+    STEPPER_UDO_PUSH_1DOSE_init();
   }
 
-  //relay
+  //RELAY
   if (minute % 2 == 1) {
     //RELAY_1_set(true);
     //RELAY_2_set(false);
@@ -19,12 +19,14 @@ void RTC_events() {
     //RELAY_2_set(true);
   }
 
+  //ALARM (if date is incorrect)
+  RTC_alarm(year);
+
 #ifdef DEBUG
   Serial.print(hour);
   Serial.print(":");
   Serial.println(minute);
 #endif
-
 }
 
 void RTC_init() {
