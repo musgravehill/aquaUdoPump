@@ -1,27 +1,28 @@
+
+//small push by button press
 void STEPPER_UDO_PUSH_handmade() {
   STEPPER_UDO_en(true);
-  STEPPER_UDO_dir(STEPPER_UDO_DIR_push);  
-  for (int i=0; i <= 255; i++){
-      STEPPER_UDO_tick();
-      delay(1);
-   } 
+  STEPPER_UDO_dir(STEPPER_UDO_DIR_push);
+  for (int i = 0; i <= 255; i++) {
+    STEPPER_UDO_tick();
+    delay(1);
+  }
+  STEPPER_UDO_en(false);
 }
 
-
+//======================== pushing 1 dose of udo =============================================
 void STEPPER_UDO_PUSH_init() {
   if ( (millis() - STEPPER_UDO_push_prev_ms) > 333000 ) { //333s прошло от предыдущей подачи удо
-    if (!STEPPER_UDO_STATE_push) {
-      STEPPER_UDO_PULL_END();
-      STEPPER_UDO_1DOSE_steps_made = 0L;
-      STEPPER_UDO_en(true);
-      STEPPER_UDO_dir(STEPPER_UDO_DIR_push);
-      STEPPER_UDO_push_prev_ms = millis();
-    }
+    STEPPER_UDO_PULL_END();
+    STEPPER_UDO_1DOSE_steps_made = 0L;
+    STEPPER_UDO_en(true);
+    STEPPER_UDO_dir(STEPPER_UDO_DIR_push);
+    STEPPER_UDO_push_prev_ms = millis();
     STEPPER_UDO_STATE_push = true;
   }
 }
 void STEPPER_UDO_PUSHING_1DOSE() {
-  if ( (STEPPER_UDO_1DOSE_steps_made < STEPPER_UDO_1DOSE_steps) && STEPPER_UDO_SENSOR_END_min_isAllow()) {
+  if ( (STEPPER_UDO_1DOSE_steps_made < STEPPER_UDO_1DOSE_steps) && STEPPER_UDO_SENSOR_END_min_isAllow() ) {
     STEPPER_UDO_tick();
     STEPPER_UDO_1DOSE_steps_made++;
   } else {
@@ -35,6 +36,7 @@ void STEPPER_UDO_PUSH_END() {
   STEPPER_UDO_STATE_push = false;
 }
 
+//======================== pulling udo =============================================
 void STEPPER_UDO_PULL_init() {
   if (!STEPPER_UDO_STATE_pull) {
     STEPPER_UDO_PUSH_END();
@@ -46,6 +48,8 @@ void STEPPER_UDO_PULL_init() {
 void STEPPER_UDO_PULLING() {
   if (STEPPER_UDO_SENSOR_END_max_isAllow()) {
     STEPPER_UDO_tick();
+  } else {
+    STEPPER_UDO_PULL_END();
   }
 }
 void STEPPER_UDO_PULL_END() {
@@ -79,6 +83,9 @@ void STEPPER_UDO_SENSOR_alarm() {
   if (!STEPPER_UDO_SENSOR_END_min_isAllow()) {
     INTERFACE_BUZZER_isOn = true;
   }
+  if (!STEPPER_UDO_SENSOR_END_max_isAllow()) {
+    INTERFACE_BUZZER_isOn = true;
+  }
 }
 
 void STEPPER_UDO_tick() {
@@ -97,17 +104,14 @@ void STEPPER_UDO_dir(bool dir_forward) {
 
 void STEPPER_UDO_en(bool is_en) {
   if (is_en) {
-    PORTB &= ~_BV(PB4); //low
-    //digitalWrite(BUZZER_pin, HIGH);
+    PORTB &= ~_BV(PB4); //low    
   } else {
-    PORTB |= _BV(PB4); //high
-    //digitalWrite(BUZZER_pin, LOW);
+    PORTB |= _BV(PB4); //high    
   }
-  delay(500); //in ms
+  delay(100); //in ms
 }
 
 void STEPPER_UDO_init() {
-
   pinMode(STEPPER_UDO_DRIVER_STEP, OUTPUT);
   digitalWrite(STEPPER_UDO_DRIVER_STEP, LOW); //no step
 

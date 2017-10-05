@@ -1,6 +1,7 @@
 
 void RTC_events() {
   RTC_DT = RTC.getDateTime();
+  uint16_t year = RTC_DT.year;
   uint8_t hour = RTC_DT.hour;
   uint8_t minute = RTC_DT.minute;
 
@@ -32,8 +33,8 @@ void RTC_init() {
   delay(10);
 }
 
-void RTC_alarm() {
-  /*if (ttime==2000) {
+void RTC_alarm(uint16_t year) {
+  if (year == 2000) {
     INTERFACE_BUZZER_isOn = true;
-    }*/
+  }
 }

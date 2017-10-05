@@ -20,11 +20,10 @@ void TIMEMACHINE_211ms() {
 
 void TIMEMACHINE_1103ms() {
   BUZZER_state();
-  STEPPER_UDO_SENSOR_alarm();
-  RTC_alarm();
+  STEPPER_UDO_SENSOR_alarm();  
 }
 
-void TIMEMACHINE_3571ms() {
+void TIMEMACHINE_3571ms() {   
   RTC_events();
 }
 
