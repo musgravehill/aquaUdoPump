@@ -43,11 +43,11 @@ uint16_t STEPPER_UDO_1DOSE_steps_made = 0L;
 bool STEPPER_UDO_STATE_push = false; //push 1 doze of UDO to aqua
 bool STEPPER_UDO_STATE_pull = false; //pull (suck) UDOs doses to cylinders
 
-uint32_t STEPPER_UDO_push_prev_ms = 1L;
+uint32_t STEPPER_UDO_push_prev_ms = 0L;
 //================================== TIMEMACHINE ==================================================
-uint32_t TIMEMACHINE_prev_211ms = 1L;
-uint32_t TIMEMACHINE_prev_1103ms = 1L;
-uint32_t TIMEMACHINE_prev_3571ms = 1L;
+uint32_t TIMEMACHINE_prev_211ms = 0L;
+uint32_t TIMEMACHINE_prev_1103ms = 0L;
+uint32_t TIMEMACHINE_prev_3571ms = 0L;
 
 //================================== INTERFACE ====================================================
 bool INTERFACE_BUZZER_isOn = false;
