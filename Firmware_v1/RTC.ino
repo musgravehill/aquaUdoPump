@@ -6,7 +6,7 @@ void RTC_events() {
   RTC_minute = RTC_DT.minute;
 
   //STEPPER_UDO
-  if (RTC_hour == 22 && RTC_minute > 26 ) {
+  if (RTC_hour == 12 && RTC_minute == 0 ) {
     STEPPER_UDO_PUSH_1DOSE_init();
   }
 
@@ -14,10 +14,10 @@ void RTC_events() {
   /*if (RTC_minute % 2 == 1) {
     RELAY_1_set(true);
     RELAY_2_set(false);
-  } else {
+    } else {
     RELAY_1_set(false);
     RELAY_2_set(true);
-  }*/
+    }*/
 
   //ALARM (if date is incorrect)
   RTC_alarm(RTC_year);

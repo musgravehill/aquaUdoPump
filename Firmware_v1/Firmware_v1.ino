@@ -17,7 +17,7 @@
 #include <OneWire.h>
 OneWire SENSOR_TEMPERATURE(2);
 
-#define DEBUG true
+//#define DEBUG true
 
 //=======================INIT IN-OUT======================================================
 #define STEPPER_UDO_DRIVER_notEN 12 //PB4
