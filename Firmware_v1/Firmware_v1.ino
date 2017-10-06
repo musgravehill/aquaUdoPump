@@ -62,6 +62,11 @@ uint8_t RTC_minute = 1;
 int SENSOR_tC = 10;
 bool SENSOR_TEMPERATURE_state = false;
 
+//===================================== ALARM =====================================================
+bool ALARM__STEPPER_UDO_SENSOR_END_minmax = false;
+bool ALARM__RTC_DATE_incorrect = false;
+bool ALARM__SENSOR_tC_minmax = false;
+
 void setup() {
   TIMER_STEPPER_UDO_config(); //timer ICR before all, first!
   RTC_init();

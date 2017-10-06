@@ -18,9 +18,9 @@ void TIMEMACHINE_211ms() {
   BUTTON_check();
 }
 
-void TIMEMACHINE_1103ms() {
-  BUZZER_state();
-  STEPPER_UDO_SENSOR_alarm();  
+void TIMEMACHINE_1103ms() {  
+  STEPPER_UDO_SENSOR_check(); 
+  ALARM_process(); 
 }
 
 void TIMEMACHINE_3571ms() {   

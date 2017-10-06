@@ -22,8 +22,8 @@ void BUTTON_check() {
   }
 }
 
-void BUZZER_state() {
-  if (INTERFACE_BUZZER_isOn) {
+void BUZZER_isOn(bool isOn) {
+  if (isOn) {
     digitalWrite(BUZZER_pin, HIGH);
   } else {
     digitalWrite(BUZZER_pin, LOW);

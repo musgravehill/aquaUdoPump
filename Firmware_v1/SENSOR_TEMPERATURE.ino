@@ -17,7 +17,7 @@ void SENSOR_TEMPERATURE_get() {
   }
 
   SENSOR_TEMPERATURE_alarm();
-  
+
 #ifdef DEBUG
   Serial.println(SENSOR_tC);
 #endif
@@ -25,6 +25,6 @@ void SENSOR_TEMPERATURE_get() {
 
 void SENSOR_TEMPERATURE_alarm() {
   if (SENSOR_tC < 20 || SENSOR_tC > 29) {
-    INTERFACE_BUZZER_isOn = true;
+    ALARM__SENSOR_tC_minmax = true;
   }
 }

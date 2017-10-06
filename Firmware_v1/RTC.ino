@@ -6,18 +6,18 @@ void RTC_events() {
   RTC_minute = RTC_DT.minute;
 
   //STEPPER_UDO
-  if (RTC_hour == 10 && RTC_minute == 30 ) {
+  if (RTC_hour == 22 && RTC_minute > 26 ) {
     STEPPER_UDO_PUSH_1DOSE_init();
   }
 
   //RELAY
-  if (RTC_minute % 2 == 1) {
-    //RELAY_1_set(true);
-    //RELAY_2_set(false);
+  /*if (RTC_minute % 2 == 1) {
+    RELAY_1_set(true);
+    RELAY_2_set(false);
   } else {
-    //RELAY_1_set(false);
-    //RELAY_2_set(true);
-  }
+    RELAY_1_set(false);
+    RELAY_2_set(true);
+  }*/
 
   //ALARM (if date is incorrect)
   RTC_alarm(RTC_year);
@@ -37,6 +37,6 @@ void RTC_init() {
 
 void RTC_alarm(uint16_t year) {
   if (year == 2000) {
-    INTERFACE_BUZZER_isOn = true;
+    ALARM__RTC_DATE_incorrect = true;
   }
 }

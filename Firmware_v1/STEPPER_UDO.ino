@@ -1,6 +1,8 @@
 
 //small push by button press
 void STEPPER_UDO_PUSH_handmade() {
+  STEPPER_UDO_PULL_END();
+  STEPPER_UDO_PUSH_END();
   STEPPER_UDO_en(true);
   STEPPER_UDO_dir(STEPPER_UDO_DIR_push);
   for (int i = 0; i <= 255; i++) {
@@ -79,12 +81,9 @@ bool STEPPER_UDO_SENSOR_END_max_isAllow() {
   }
 }
 
-void STEPPER_UDO_SENSOR_alarm() {
-  if (!STEPPER_UDO_SENSOR_END_min_isAllow()) {
-    INTERFACE_BUZZER_isOn = true;
-  }
-  if (!STEPPER_UDO_SENSOR_END_max_isAllow()) {
-    INTERFACE_BUZZER_isOn = true;
+void STEPPER_UDO_SENSOR_check() {
+  if (!STEPPER_UDO_SENSOR_END_min_isAllow() || !STEPPER_UDO_SENSOR_END_max_isAllow()) {
+    ALARM__STEPPER_UDO_SENSOR_END_minmax = true;
   }
 }
 
@@ -104,9 +103,9 @@ void STEPPER_UDO_dir(bool dir_forward) {
 
 void STEPPER_UDO_en(bool is_en) {
   if (is_en) {
-    PORTB &= ~_BV(PB4); //low    
+    PORTB &= ~_BV(PB4); //low
   } else {
-    PORTB |= _BV(PB4); //high    
+    PORTB |= _BV(PB4); //high
   }
   delay(100); //in ms
 }
