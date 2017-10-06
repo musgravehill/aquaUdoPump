@@ -38,5 +38,7 @@ void RTC_init() {
 void RTC_alarm(uint16_t year) {
   if (year == 2000) {
     ALARM__RTC_DATE_incorrect = true;
+  } else {
+    ALARM__RTC_DATE_incorrect = false;
   }
 }

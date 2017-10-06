@@ -1,15 +1,17 @@
 
 //small push by button press
 void STEPPER_UDO_PUSH_handmade() {
-  STEPPER_UDO_PULL_END();
-  STEPPER_UDO_PUSH_END();
-  STEPPER_UDO_en(true);
-  STEPPER_UDO_dir(STEPPER_UDO_DIR_push);
-  for (int i = 0; i <= 255; i++) {
-    STEPPER_UDO_tick();
-    delay(1);
+  if (STEPPER_UDO_SENSOR_END_min_isAllow()) {
+    STEPPER_UDO_PULL_END();
+    STEPPER_UDO_PUSH_END();
+    STEPPER_UDO_en(true);
+    STEPPER_UDO_dir(STEPPER_UDO_DIR_push);
+    for (int i = 0; i <= 255; i++) {
+      STEPPER_UDO_tick();
+      delay(1);
+    }
+    STEPPER_UDO_en(false);
   }
-  STEPPER_UDO_en(false);
 }
 
 //======================== pushing 1 dose of udo =============================================
@@ -84,6 +86,8 @@ bool STEPPER_UDO_SENSOR_END_max_isAllow() {
 void STEPPER_UDO_SENSOR_check() {
   if (!STEPPER_UDO_SENSOR_END_min_isAllow() || !STEPPER_UDO_SENSOR_END_max_isAllow()) {
     ALARM__STEPPER_UDO_SENSOR_END_minmax = true;
+  } else {
+    ALARM__STEPPER_UDO_SENSOR_END_minmax = false;
   }
 }
 
