@@ -12,7 +12,7 @@ void RTC_events() {
 
   //FEED
   if (RTC_hour == 17 && RTC_minute == 50 ) {
-    FEEDER_1dose_init();
+    FEEDER_1DOSE_init();
   }
 
   //RELAY

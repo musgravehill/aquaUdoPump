@@ -9,15 +9,22 @@ void INTERFACE_init() {
 }
 
 void BUTTON_check() {
-  int8_t btnState;
+  int8_t btnState1, btnState2;
+
+  btnState1 = digitalRead(BUTTON_udo_push);
+  btnState2 = digitalRead(BUTTON_udo_pull);
+
+  //feed
+  if (btnState1 == LOW && btnState2 == LOW) { //press it
+    FEEDER_1DOSE_init();
+  }
+
   //udo push
-  btnState = digitalRead(BUTTON_udo_push);
-  if (btnState == LOW) { //press it
+  if (btnState1 == LOW) { //press it
     STEPPER_UDO_PUSH_handmade();
   }
   //udo pull
-  btnState = digitalRead(BUTTON_udo_pull);
-  if (btnState == LOW) { //press it
+  if (btnState2 == LOW) { //press it
     STEPPER_UDO_PULL_init();
   }
 }

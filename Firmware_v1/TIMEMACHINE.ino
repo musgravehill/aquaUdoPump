@@ -16,6 +16,7 @@ void TIMEMACHINE_loop() {
 
 void TIMEMACHINE_211ms() {
   BUTTON_check();
+  FEEDER_1DOSE_process();
 }
 
 void TIMEMACHINE_1103ms() {  
