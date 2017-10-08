@@ -11,7 +11,10 @@ void RTC_events() {
   }
 
   //FEED
-  if (RTC_hour == 17 && RTC_minute == 50 ) {
+  if (RTC_hour == 12 && RTC_minute == 00 ) {
+    FEEDER_1DOSE_init();
+  }
+  if (RTC_hour == 16 && RTC_minute == 30 ) {
     FEEDER_1DOSE_init();
   }
 
