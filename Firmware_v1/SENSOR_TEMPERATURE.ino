@@ -19,7 +19,8 @@ void SENSOR_TEMPERATURE_get() {
   SENSOR_TEMPERATURE_alarm();
 
 #ifdef DEBUG
-  Serial.println(SENSOR_tC);
+  Serial.print(SENSOR_tC);
+  Serial.println(" °C");
 #endif
 }
 

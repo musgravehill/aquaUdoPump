@@ -26,6 +26,6 @@ void TIMEMACHINE_1103ms() {
 
 void TIMEMACHINE_3571ms() {   
   RTC_events();
-  //SENSOR_TEMPERATURE_get();
+  SENSOR_TEMPERATURE_get();
 }
 
