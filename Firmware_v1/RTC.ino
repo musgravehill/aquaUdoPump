@@ -10,14 +10,19 @@ void RTC_events() {
     STEPPER_UDO_PUSH_1DOSE_init();
   }
 
+  //FEED
+  if (RTC_hour == 17 && RTC_minute == 50 ) {
+    FEEDER_1dose_init();
+  }
+
   //RELAY
   /*if (RTC_minute % 2 == 1) {
     RELAY_1_set(true);
     RELAY_2_set(false);
-  } else {
+    } else {
     RELAY_1_set(false);
     RELAY_2_set(true);
-  }*/
+    }*/
 
   //ALARM (if date is incorrect)
   RTC_alarm(RTC_year);

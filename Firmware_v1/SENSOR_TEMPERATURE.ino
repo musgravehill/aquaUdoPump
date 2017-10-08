@@ -24,7 +24,7 @@ void SENSOR_TEMPERATURE_get() {
 }
 
 void SENSOR_TEMPERATURE_alarm() {
-  if (SENSOR_tC < 20 || SENSOR_tC > 29) {
+  if (SENSOR_tC < SENSOR_tC_min_alarm || SENSOR_tC > SENSOR_tC_max_alarm) {
     ALARM__SENSOR_tC_minmax = true;
   } else {
     ALARM__SENSOR_tC_minmax = false;

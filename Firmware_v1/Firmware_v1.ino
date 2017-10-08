@@ -6,6 +6,14 @@
   2. feeder
 */
 
+//=============================== CONFIG =============================================
+#define UDO_1dose_ml  1.0; // 1ml
+#define FEEDER_1dose_ms  3000; //3000ms = 3s 
+#define SENSOR_tC_min_alarm  20; //celcius degree
+#define SENSOR_tC_max_alarm  27; //celcius degree
+
+//=============================== include libs =======================================
+
 //may be Timer1 ?
 #include <stdlib.h>
 
@@ -34,7 +42,7 @@ OneWire SENSOR_TEMPERATURE(2);
 #define RELAY_2 4 //PD4
 //================================= STEPPER_UDO =================================================
 // 1 ml => 5.6 mm cylinder => 7 оборотов винта M5*0.8 => 7 * (2048 steps on 1 turn)
-uint16_t STEPPER_UDO_1DOSE_steps = 7 * 2048L;
+uint16_t STEPPER_UDO_1DOSE_steps = 7.0 * 2048.0 * UDO_1dose_ml;
 uint16_t STEPPER_UDO_1DOSE_steps_made = 0L;
 
 #define STEPPER_UDO_DIR_push true
@@ -66,6 +74,10 @@ bool SENSOR_TEMPERATURE_state = false;
 bool ALARM__STEPPER_UDO_SENSOR_END_minmax = false;
 bool ALARM__RTC_DATE_incorrect = false;
 bool ALARM__SENSOR_tC_minmax = false;
+
+//===================================== FEEDER ====================================================
+uint32_t FEEDER_time_start_ms = 0L;
+bool FEEDER_isFeed = false;
 
 void setup() {
   TIMER_STEPPER_UDO_config(); //timer ICR before all, first!
