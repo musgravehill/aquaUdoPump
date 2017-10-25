@@ -71,12 +71,15 @@ void loop()
 
   //error 
   myOLED.setFont(SmallFont); 
-  myOLED.print("~ALARM~ tC DT UDO", 0, 28);   
+  myOLED.print("ALARM", 0, 28);
+  myOLED.print("tC", 36, 28);
+  myOLED.print("DT", 54, 28);
+  myOLED.print("UDO", 72, 28);   
 
   //uptime
   myOLED.setFont(SmallFont); 
   myOLED.print("UPTIME DAYS", 0, 40);  
-  myOLED.printNumI(millis()/86400000, 68, 40);
+  myOLED.printNumI(millis()/86400000, 72, 40);
  
   myOLED.update();
   delay (5000);   
