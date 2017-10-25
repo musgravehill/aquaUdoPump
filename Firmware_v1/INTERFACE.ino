@@ -16,6 +16,7 @@ void BUTTON_check() {
   //oled
   if (btnState1 == LOW || btnState2 == LOW) { //press it
     OLED_time_start_ms = millis();
+    OLED_isOn = true;
   }
   //feed
   if (btnState1 == LOW && btnState2 == LOW) { //press it

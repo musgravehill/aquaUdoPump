@@ -5,11 +5,13 @@ void OLED_init() {
 
 void OLED_process() {
   if (OLED_isOn) {
-    uint32_t  currMillis = millis();
-    if ((currMillis - OLED_time_start_ms) > 30000) {
-      OLED_isOn = false;
-    }
     OLED_display();
+    uint32_t  currMillis = millis();
+    if ((currMillis - OLED_time_start_ms) > 13000) { //31s
+      OLED_isOn = false;
+      myOLED.clrScr();
+      myOLED.update();
+    }    
   }
 }
 
