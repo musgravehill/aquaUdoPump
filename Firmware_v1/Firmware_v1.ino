@@ -1,13 +1,11 @@
 
 /*
   ======TODO
-  0. OLED 0.96
-  1. DS18B20 if (T<20 || T>28) => ALERT
-  2. feeder
+
 */
 
 //=============================== CONFIG =============================================
-#define UDO_1DOSE_ml  1.5 // 1.0 ml
+#define UDO_1DOSE_ml  2.0 // 1.0 ml
 #define FEEDER_1DOSE_ms  3000 //3000ms = 3s 
 #define SENSOR_tC_min_alarm  20 //celcius degree
 #define SENSOR_tC_max_alarm  28 //celcius degree
@@ -26,6 +24,11 @@
 //DS18B20  temperature
 #include <OneWire.h>
 OneWire SENSOR_TEMPERATURE(2);
+
+//OLED SDA A4, SCL A5
+#include <OLED_I2C.h>
+OLED  myOLED(SDA, SCL);
+extern uint8_t SmallFont[];
 
 //=======================INIT IN-OUT======================================================
 #define STEPPER_UDO_DRIVER_notEN 12 //PB4
@@ -85,6 +88,7 @@ void setup() {
   STEPPER_UDO_init();
   INTERFACE_init();
   RELAY_init();
+  OLED_init();
 #ifdef DEBUG
   Serial.begin(9600);
 #endif
