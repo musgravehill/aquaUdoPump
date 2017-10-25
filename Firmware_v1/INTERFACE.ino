@@ -12,6 +12,11 @@ void BUTTON_check() {
   int8_t btnState1, btnState2;
   btnState1 = digitalRead(BUTTON_udo_push);
   btnState2 = digitalRead(BUTTON_udo_pull);
+
+  //oled
+  if (btnState1 == LOW || btnState2 == LOW) { //press it
+    OLED_time_start_ms = millis();
+  }
   //feed
   if (btnState1 == LOW && btnState2 == LOW) { //press it
     FEEDER_1DOSE_init();

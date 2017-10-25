@@ -28,7 +28,9 @@ OneWire SENSOR_TEMPERATURE(2);
 //OLED SDA A4, SCL A5
 #include <OLED_I2C.h>
 OLED  myOLED(SDA, SCL);
-extern uint8_t SmallFont[];
+extern uint8_t SmallFont[]; //6*8
+extern uint8_t MediumNumbers[]; //12*16
+extern uint8_t BigNumbers[]; //14*24
 
 //=======================INIT IN-OUT======================================================
 #define STEPPER_UDO_DRIVER_notEN 12 //PB4
@@ -81,6 +83,10 @@ bool ALARM__SENSOR_tC_minmax = false;
 //===================================== FEEDER ====================================================
 uint32_t FEEDER_time_start_ms = 0L;
 bool FEEDER_isFeed = false;
+
+//===================================== OLED ====================================================
+uint32_t OLED_time_start_ms = 0L;
+bool OLED_isOn = true;
 
 void setup() {
   TIMER_STEPPER_UDO_config(); //timer ICR before all, first!
