@@ -178,7 +178,7 @@ void OLED::invertText(bool mode)
 		cfont.inverted=0;
 }
 
-void OLED::print(char *st, int x, int y)
+void OLED::print(const char *st, int x, int y)
 {
 	unsigned char ch;
 	int stl;

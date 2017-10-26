@@ -110,7 +110,7 @@ class OLED
 		void	clrPixel(uint16_t x, uint16_t y);
 		void	invPixel(uint16_t x, uint16_t y);
 		void	invertText(bool mode);
-		void	print(char *st, int x, int y);
+		void	print(const char *st, int x, int y);
 		void	print(String st, int x, int y);
 		void	printNumI(long num, int x, int y, int length=0, char filler=' ');
 		void	printNumF(double num, byte dec, int x, int y, char divider='.', int length=0, char filler=' ');

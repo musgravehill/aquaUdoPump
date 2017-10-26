@@ -16,6 +16,8 @@
 
 //may be Timer1 ?
 #include <stdlib.h>
+#include <avr/wdt.h> //wathchdog
+#include <stdint.h>
 
 //RTC
 #include <Wire.h>
@@ -72,7 +74,7 @@ uint8_t RTC_hour = 1;
 uint8_t RTC_minute = 1;
 
 //===================================== SENSOR_TEMPERATURE ========================================
-int SENSOR_tC = 10;
+float SENSOR_tC = 10.0;
 bool SENSOR_TEMPERATURE_state = false;
 
 //===================================== ALARM =====================================================
@@ -89,6 +91,9 @@ uint32_t OLED_time_start_ms = 0L;
 bool OLED_isOn = true;
 
 void setup() {
+  MCUSR = 0;  //VERY VERY IMPORTANT!!!! ELSE WDT DOESNOT RESET, DOESNOT DISABLED!!!
+  wdt_disable();
+
   TIMER_STEPPER_UDO_config(); //timer ICR before all, first!
   RTC_init();
   STEPPER_UDO_init();
@@ -102,5 +107,8 @@ void setup() {
 }
 
 void loop() {
+  wdt_enable (WDTO_8S); //try to have time < 8s, else autoreset by watchdog
   TIMEMACHINE_loop();
+  wdt_reset();
+  wdt_disable();
 }
