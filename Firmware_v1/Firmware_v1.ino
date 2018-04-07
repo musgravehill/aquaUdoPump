@@ -5,10 +5,10 @@
 */
 
 //=============================== CONFIG =============================================
-#define UDO_1DOSE_ml  2.0 // 1.0 ml
+#define UDO_1DOSE_ml  1.0 // 1.0 ml
 #define FEEDER_1DOSE_ms  3000 //3000ms = 3s 
-#define SENSOR_tC_min_alarm  20 //celcius degree
-#define SENSOR_tC_max_alarm  28 //celcius degree
+#define SENSOR_tC_min_alarm  18 //celcius degree
+#define SENSOR_tC_max_alarm  30 //celcius degree
 
 //#define DEBUG true
 
