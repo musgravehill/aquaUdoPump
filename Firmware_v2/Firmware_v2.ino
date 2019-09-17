@@ -1,0 +1,100 @@
+
+/*
+  ======TODO
+
+*/
+
+//=============================== CONFIG =============================================
+#define UDO_1DOSE_ms  10 //  
+#define FEEDER_1DOSE_ms  2000 //3000ms = 3s 
+#define SENSOR_tC_min_alarm  16 //celcius degree
+#define SENSOR_tC_max_alarm  36 //celcius degree
+
+//#define DEBUG true
+
+//=============================== include libs =======================================
+
+#include <stdlib.h>
+#include <avr/wdt.h> //wathchdog
+#include <stdint.h>
+
+//RTC
+#include <Wire.h>
+#include <DS3231.h>
+
+//DS18B20  temperature
+#include <OneWire.h>
+OneWire SENSOR_TEMPERATURE(2);
+
+//OLED SDA A4, SCL A5
+#include <OLED_I2C.h>
+OLED  myOLED(SDA, SCL);
+extern uint8_t SmallFont[]; //6*8
+extern uint8_t MediumNumbers[]; //12*16
+extern uint8_t BigNumbers[]; //14*24
+
+//=======================INIT IN-OUT======================================================
+#define BUZZER_pin 5 //PD5
+#define BUTTON_1 6 //PD6
+#define BUTTON_2 7 //PD7
+#define RELAY_1 3 //PD3
+#define RELAY_2 4 //PD4
+//================================== TIMEMACHINE ==================================================
+uint32_t TIMEMACHINE_prev_211ms = 0L;
+uint32_t TIMEMACHINE_prev_1103ms = 0L;
+uint32_t TIMEMACHINE_prev_3571ms = 0L;
+
+//================================== INTERFACE ====================================================
+bool INTERFACE_BUZZER_isOn = false;
+uint32_t INTERFACE_BUZZER_on_start = 0L;
+ 
+
+//==================================== RTC ========================================================
+DS3231 RTC;
+RTCDateTime RTC_DT;
+uint8_t RTC_hour = 1;
+uint8_t RTC_minute = 1;
+
+//===================================== SENSOR_TEMPERATURE ========================================
+float SENSOR_tC = 10.0;
+bool SENSOR_TEMPERATURE_state = false;
+
+//===================================== ALARM =====================================================
+bool ALARM__RTC_DATE_incorrect = false;
+bool ALARM__SENSOR_tC_minmax = false;
+
+//===================================== FEEDER ====================================================
+uint32_t FEEDER_time_start_ms = 0L;
+bool FEEDER_isFeed = false;
+
+//===================================== UDO ====================================================
+uint32_t UDO_time_start_ms = 0L;
+bool UDO_isFeed = false;
+
+//===================================== OLED ====================================================
+uint32_t OLED_time_start_ms = 0L;
+bool OLED_isOn = true;
+
+void setup() {
+  //wathchdog
+  MCUSR = 0;  //VERY VERY IMPORTANT!!!! ELSE WDT DOESNOT RESET, DOESNOT DISABLED!!!
+  wdt_disable();
+
+  RTC_init();
+  INTERFACE_init();
+  RELAY_init();
+  OLED_init();
+
+#ifdef DEBUG
+  Serial.begin(9600);
+#endif
+
+  delay(10);
+}
+
+void loop() {
+  wdt_enable (WDTO_8S); //try to have time < 8s, else autoreset by watchdog
+  TIMEMACHINE_loop();
+  wdt_reset();
+  wdt_disable();
+}
